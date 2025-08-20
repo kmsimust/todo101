@@ -1,4 +1,4 @@
-version: "1.0"
+version: "3.1"
 
 services:
   mongo:
@@ -7,7 +7,9 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ./backend/data:/data/db mongo
+      - ./backend/data:/data/db
+    networks:
+      - todo_network
 
   todo_backend:
     container_name: backend
@@ -18,7 +20,9 @@ services:
     environment:
      - MONGO_URL=mongodb://mongo:27017/todos
     volumes:
-      - ./backend:/node_modules
+      - ./backend:/app
+    networks:
+      - todo_network
     depends_on:
       - mongo
 
@@ -29,6 +33,12 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend:/node_modules
+      - ./frontend:/app
+    networks:
+      - todo_network
     depends_on:
       - todo_backend
+
+networks:
+  todo_network:
+    driver: bridge
