@@ -25,10 +25,10 @@ jobs:
 
       - name: Tag & Push Backend image
         run: |
-          docker tag todo101-backend:latest kmsimust/backend:latest
+          docker tag backend:latest kmsimust/backend:latest
           docker push kmsimust/backend:latest
           
       - name: Tag & Push Frontend image
         run: |
-          docker tag todo101-frontend:latest kmsimust/frontend:latest
+          docker tag frontend:latest kmsimust/frontend:latest
           docker push kmsimust/frontend:latest
